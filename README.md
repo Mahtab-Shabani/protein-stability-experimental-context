@@ -25,18 +25,20 @@ This design meets the primary aim of the project, which is to determine the exte
 
 ## Data cleaning and curation <br />
 Because of FireProtDB's heterogeneous provenance, important experimental values like ΔΔG, melting temperature (TM), and pH are not kept in a coherent numeric format, and they may contain missing or non-numeric values. These types of inconsistencies block statistical and machine learning analyses from being executed. <br />
+ <br />
 To resolve this kind of problem, a specialized cleaning step was applied to achieve uniform numerical coherence throughout all quantitative features. All thermodynamic variable (ΔΔG, TM, pH) were securely and safely converted to numerical form, and entries without valid ΔΔG measurement were eliminated, as ΔΔG is the main variable of interest of this study. <br />
+ <br />
 After cleaning, the dataset was reduced from 4,420 extracted records to 598 high-quality entries. Although this represents a substantial reduction in size, it reflects the limited availability of complete and experimentally consistent stability measurements, a common challenge in data-driven protein engineering. <br />
 
 ## ΔΔG filtering and physical sanity check <br />
-Prior to downstream analysis, a physical sanity check was applied to remove ΔΔG values outside a realistic thermodynamic range. Only mutations with ΔΔG values between −20 and +20 kcal/mol were retained. This is because values outside the range highly are not likely to be meaningful, reflect a single mutation which may be the result of a physical experimental error or be the result of error in an annotation.  <br />
+Prior to downstream analysis, a physical sanity check was applied to remove ΔΔG values outside a realistic thermodynamic range. Only mutations with ΔΔG values between −20 and +20 kcal/mol were retained. This is because values outside the range highly are not likely to be meaningful, reflect a single mutation which may be the result of a physical experimental error or be the result of error in an annotation.  <br /> <br />
 The filtering step resulted in a set containing 317 mutations which have plausible stability changes. The resulting ΔΔG distribution was examined using summary statistics and histogram visualization to confirm its suitability for statistical analysis and machine learning. <br />
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/5b1ed816-0931-4483-a2af-44c547b65053" />
 
 ## Exploratory analysis of protein stability <br />
-After the physical filtering, an exploratory analysis was performed to characterize the stability landscape of the selected mutations.<br />
-Mutations were first categorized into stabilizing (ΔΔG < 0) and destabilizing (ΔΔG > 0) classes, allowing the continuous thermodynamic signal to be interpreted in biologically meaningful terms. The resulting class distribution reveals a strong imbalance toward destabilizing mutations, consistent with known trends in protein stability experiments.<br />
+After the physical filtering, an exploratory analysis was performed to characterize the stability landscape of the selected mutations.<br /> <br />
+Mutations were first categorized into stabilizing (ΔΔG < 0) and destabilizing (ΔΔG > 0) classes, allowing the continuous thermodynamic signal to be interpreted in biologically meaningful terms. The resulting class distribution reveals a strong imbalance toward destabilizing mutations, consistent with known trends in protein stability experiments.<br /> <br />
 Approximately 90% of the analyzed variants exhibit positive ΔΔG values, highlighting an intrinsic bias in protein stability datasets and posing an important challenge for downstream machine learning models. <br />
 
 #### Figure – Distribution of stabilizing and destabilizing mutations <br />
@@ -65,7 +67,7 @@ The logistic regression model achieved an accuracy of 92.51%, with a recall of 1
 ## Decision Tree: Interpretability over performance <br />
 A decision tree classifier was trained on the same feature set to enhance interpretability. The resulting tree revealed a few dominant decision rules, mostly related to organism identity and experimental conditions, and achieved perfect accuracy on the test set. <br />
  <br />
-Despite the high apparent performance, the tree's shallow structure and small feature space point to possible overfitting, underscoring the necessity of validation on separate datasets. <br />
+Despite the high apparent performance, the tree's shallow structure and small feature space point to possible overfitting, underscoring the necessity of validation on separate datasets. <br /> <br />
 According to the learned decision tree, stability classification is heavily influenced by experimental context variables (such as organism and pH), frequently surpassing the direct thermodynamic signal. This finding supports the use of experimental metadata in data-driven protein engineering pipelines and highlights the multiparametric character of protein stability measurements. <br />
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/54a360e1-263d-4622-a359-4bad9df47dbc" />
