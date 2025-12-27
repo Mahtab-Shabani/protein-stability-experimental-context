@@ -1,11 +1,9 @@
 # protein-stability-experimental-context
 
-# protein-stability-experimental-context
-
 ## Dataset Description <br />
 This project uses  ``` FireProtDB ``` , a comprehensive and manually curated database of protein stability data for single-point mutations. <br />
 
-#### 📥 How to download FireProtDB data <br />
+### 📥 How to download FireProtDB data <br />
 The FireProtDB dataset can be downloaded from: https://loschmidt.chemi.muni.cz/fireprotdb/download/ (download  ``` CSV Export ```.)  <br />
 Because ``` CSV Export ```  is too big (1.65 GB), we shrunk it to a small version by  ``` shrink.m ``` , and the first 50,000 records were selected instead of processing the entire database. The resulting dataset  ``` (FireProtDB_small.csv) ```  represents a compact yet biologically meaningful subset of the original database. <br />
 ### Dataset Features <br />
@@ -80,5 +78,8 @@ Future studies may involve constructing more complex machine learning models usi
 
 Dependency
 ------------
-This code is implemented purely in Matlab2014a and doesn't depends on any other toolbox.
+This code is implemented in MATLAB 2014a and doesn't depend on any other toolbox.
 
+## Basic Usage
+
+* Run the 'DEMO.m' script.
